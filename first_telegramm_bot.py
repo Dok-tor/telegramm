@@ -1,16 +1,18 @@
-import telebot
-bot = telebot.TeleBot('1646319872:AAFRKYYKLkCCeuG-3AWYYoGeNmT_Z566oYE')
-
-@bot.message_handler(commands=['start'])
-def send_welcome(message):
-    bot.reply_to(message, f'Я бот. Приятно познакомиться, {message.from_user.first_name}')
+from telegram.ext import Updater
+from telegram.ext import CommandHandler
 
 
-@bot.message_handler(content_types=['text'])
-def get_text_messages(message):
-    if message.text.lower() == 'привет':
-        bot.send_message(message.from_user.id, 'Привет!')
-    else:
-        bot.send_message(message.from_user.id, 'Не понимаю, что это значит.')
+def sms(bot, update):
+    print("something")
+    bot.message.reply_text('Привет\nЯ первый бот Doc-а')
 
-bot.polling(none_stop=True)
+
+def main():
+    first_bot = Updater("1646319872:AAFRKYYKLkCCeuG-3AWYYoGeNmT_Z566oYE", use_context=True)
+
+    first_bot.dispatcher.add_handler(CommandHandler('start', sms))
+    first_bot.start_polling()
+    first_bot.idle()
+
+
+main()
