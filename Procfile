@@ -1,1 +1,1 @@
-web: python first_telegramm_bot.py
+worker: python first_telegramm_bot.py $PORT
